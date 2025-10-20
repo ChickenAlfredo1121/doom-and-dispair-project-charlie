@@ -1,1 +1,0 @@
-# doom-and-dispair-project-charlie
