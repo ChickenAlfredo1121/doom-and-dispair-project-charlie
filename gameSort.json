@@ -35,17 +35,17 @@
     "appName": "Match the Hello World phrase",
     "devName": "JohnWeatherford",
     "repo": "https://github.com/JohnWeatherford/vigilant-doodle-bravo",
-    "app"; "https://johnweatherford.github.io/vigilant-doodle-bravo/",
+    "app": "https://johnweatherford.github.io/vigilant-doodle-bravo/",
     "img": "https://github.com/user-attachments/assets/9232375f-61fb-4a6f-8adb-c4bb2b1df1eb" 
   },
 
   {
     "id": 5, 
     "appName": "Click Click Game",
-    "devName" "sweetiesyvi",
+    "devName": "sweetiesyvi",
     "repo": "https://github.com/sweetiesyvi/ProjectBravo",
     "app": "https://sweetiesyvi.github.io/ProjectBravo/",
     "img": "https://sweetiesyvi.github.io/ProjectBravo/images/ClickClickGameSnippet.png"
-  },
+  }
 ]
 }
