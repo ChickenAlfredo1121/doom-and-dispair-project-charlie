@@ -4,7 +4,7 @@
 - syviwha ngulungu https://github.com/sweetiesyvi
 
 
-# Product name
+# Product name: Search and choose
 
 Search and Choose is an app that presents a group of small web-based games made by developer in an engaging way.
 Through this project, users have the possibility to look through, sort, and discover different games from various creators.
