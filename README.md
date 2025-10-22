@@ -20,9 +20,9 @@ A game entry provides information about its name, developer, repository link, li
 
 # validation
 
-## NU HTML VALIDATOR: https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fchickenalfredo1121.github.io%2FProjectBravo%2F
+**NU HTML VALIDATOR: https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fchickenalfredo1121.github.io%2FProjectBravo%2F**
 
-## WAVE Accessibility Report: https://wave.webaim.org/report#/https://chickenalfredo1121.github.io/ProjectBravo
+**WAVE Accessibility Report: https://wave.webaim.org/report#/https://chickenalfredo1121.github.io/ProjectBravo**
 
 
 # code base
