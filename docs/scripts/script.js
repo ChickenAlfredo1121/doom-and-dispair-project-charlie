@@ -1,112 +1,157 @@
 (function () {
-	const LOCAL_JSON = './gameSort.json';
+    const LOCAL_JSON = './gameSort.json';
 
-	// Array for Games
-	let games = [];
+    // Array for Games
+    let games = [];
 
-	// DOM refs
-	const listEl = document.getElementById('gameSort');
-	const byNameBtn = document.querySelector('.by-name');
-	const byOrderBtn = document.querySelector('.by-order');
-	const byRatingBtn = document.querySelector('.by-rating');
+    // DOM refs
+    const listEl = document.getElementById('gameSort');
+    const byNameBtn = document.querySelector('.by-name');
+    const byOrderBtn = document.querySelector('.by-order');
+    const byRatingBtn = document.querySelector('.by-rating');
 
-	// Define the image container
-	const imageContainer = document.getElementById('imageContainer');
+    // Define the image container
+    const imageContainer = document.getElementById('imageContainer');
 
-	// Sort by app name
-	// Resource Link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-	fetch('./gameSort.json')
-		.then(r => { if (!r.ok) throw new Error('Could not fetch'); return r.json(); })
-		.then(data => {
-			games = Array.isArray(data.gameSort) ? data.gameSort.slice() : (Array.isArray(data) ? data.slice() : []);
-		})
-		.catch(err => console.error('Fetch error:', err));
+    // Small utility: placeholder used when image missing or fails
+    const PLACEHOLDER_IMAGE = 'https://via.placeholder.com/400x250.png?text=No+Image';
 
-	function renderGameDetails(games) {
-		imageContainer.innerHTML = ''; // Clear the container before rendering
+    // Normalize common URL mistakes (protocol-relative, GitHub blob -> raw, spaces)
+    function normalizeUrl(u) {
+        if (!u || typeof u !== 'string') return null;
+        let s = u.trim();
+        // protocol-relative -> https
+        if (s.startsWith('//')) s = 'https:' + s;
+        // add https for bare 'www.example...'
+        if (/^www\./i.test(s)) s = 'https://' + s;
+        // convert github blob -> raw.githubusercontent
+        // https://github.com/user/repo/blob/branch/path/to/file.png
+        // -> https://raw.githubusercontent.com/user/repo/branch/path/to/file.png
+        const blobMatch = s.match(/^https?:\/\/github\.com\/([^\/]+)\/([^\/]+)\/blob\/([^\/]+)\/(.+)$/i);
+        if (blobMatch) {
+            const user = blobMatch[1], repo = blobMatch[2], branch = blobMatch[3], path = blobMatch[4];
+            s = `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${path}`;
+        }
+        // encode spaces
+        s = s.replace(/ /g, '%20');
+        return s;
+    }
 
-		games.forEach(game => {
-			// Create a container for each game
-			const gameContainer = document.createElement('div');
-			gameContainer.className = 'game-container';
+    // Sort by app name
+    // Resource Link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+    fetch(LOCAL_JSON)
+        .then(r => { if (!r.ok) throw new Error('Could not fetch'); return r.json(); })
+        .then(data => {
+            games = Array.isArray(data.gameSort) ? data.gameSort.slice() : (Array.isArray(data) ? data.slice() : []);
+        })
+        .catch(err => console.error('Fetch error:', err));
 
-			// Add the game name
-			const gameName = document.createElement('h3');
-			gameName.textContent = game.appName;
-			gameContainer.appendChild(gameName);
+    function renderGameDetails(gamesList) {
+        imageContainer.innerHTML = ''; // Clear the container before rendering
 
-			// Add the developer name
-			const devName = document.createElement('p');
-			devName.textContent = `Developer: ${game.devName}`;
-			gameContainer.appendChild(devName);
+        // guard: ensure we have an array
+        if (!Array.isArray(gamesList)) return;
 
-			// Add the image
-			const img = document.createElement('img');
-			img.src = game.img;
-			img.alt = `${game.appName} Image`;
-			img.className = 'game-image';
-			img.style.width = '300px'; 
-			img.style.height = 'auto'; 
-			img.onerror = () => {
-				img.src = 'placeholder.png'; 
-			};
-			gameContainer.appendChild(img);
+        gamesList.forEach(game => {
+            try {
+                // Create a container for each game
+                const gameContainer = document.createElement('div');
+                gameContainer.className = 'game-container';
 
-			// Add the live link
-			const liveLink = document.createElement('a');
-			liveLink.href = game.app;
-			liveLink.textContent = 'Live App';
-			liveLink.target = '_blank';
-			liveLink.id = 'liveLink';
-			gameContainer.appendChild(liveLink);
+                // Add the game name
+                const gameName = document.createElement('h3');
+                gameName.textContent = game?.appName || 'Untitled';
+                gameContainer.appendChild(gameName);
 
-			// Add the GitHub repo link
-			const repoLink = document.createElement('a');
-			repoLink.href = game.repo;
-			repoLink.textContent = 'GitHub Repo';
-			repoLink.target = '_blank';
-			repoLink.id = 'repoLink';
-			gameContainer.appendChild(repoLink);
+                // Add the developer name
+                const devName = document.createElement('p');
+                devName.textContent = `Developer: ${game?.devName || 'Unknown'}`;
+                gameContainer.appendChild(devName);
 
-			// Append the game container to the image container
-			imageContainer.appendChild(gameContainer);
-		});
-	}
+                // Add the image
+                const img = document.createElement('img');
+                // Normalize URL and fall back to placeholder if needed
+                const candidate = normalizeUrl(game?.img) || game?.img || PLACEHOLDER_IMAGE;
+                img.src = candidate;
+                img.alt = `${game?.appName || 'Game'} Image`;
+                img.className = 'game-image';
+                img.style.width = '300px';
+                img.style.height = 'auto';
+                // If image fails to load, show placeholder and avoid infinite loop
+                img.onerror = () => {
+                    img.onerror = null;
+                    img.src = PLACEHOLDER_IMAGE;
+                    img.classList.add('broken-img');
+                };
+                gameContainer.appendChild(img);
 
-	function sortGames(games, criteria) {
-		return games.sort((a, b) => {
-			if (criteria === 'name') {
-				return a.appName.localeCompare(b.appName, undefined, { sensitivity: 'base' });
-			} else if (criteria === 'developer') {
-				return a.devName.localeCompare(b.devName, undefined, { sensitivity: 'base' });
-			}
-			return 0;
-		});
-	}
+                // Add the live link (only if present)
+                if (game?.app) {
+                    const liveLink = document.createElement('a');
+                    liveLink.href = game.app;
+                    liveLink.textContent = 'Live App';
+                    liveLink.target = '_blank';
+                    liveLink.rel = 'noopener noreferrer';
+                    liveLink.id = 'liveLink';
+                    liveLink.className = 'me-2';
+                    gameContainer.appendChild(liveLink);
+                }
 
-	fetch('./gameSort.json')
-		.then(response => {
-			if (!response.ok) throw new Error('Failed to fetch game details');
-			return response.json();
-		})
-		.then(data => {
-			const games = data.gameSort || [];
+                // Add the GitHub repo link (only if present)
+                if (game?.repo) {
+                    const repoLink = document.createElement('a');
+                    repoLink.href = game.repo;
+                    repoLink.textContent = 'GitHub Repo';
+                    repoLink.target = '_blank';
+                    repoLink.rel = 'noopener noreferrer';
+                    repoLink.id = 'repoLink';
+                    gameContainer.appendChild(repoLink);
+                }
 
-			// Initial render
-			renderGameDetails(games);
+                // Append the game container to the image container
+                imageContainer.appendChild(gameContainer);
+            } catch (renderErr) {
+                // keep rendering even if one item is malformed
+                console.error('Error rendering item', game, renderErr);
+            }
+        });
+    }
 
-			// Add sorting functionality
-			byNameBtn.addEventListener('click', () => {
-				const sortedGames = sortGames(games, 'name');
-				renderGameDetails(sortedGames);
-			});
+    function sortGames(gamesArr, criteria) {
+        return gamesArr.sort((a, b) => {
+            if (criteria === 'name') {
+                return (a?.appName || '').localeCompare(b?.appName || '', undefined, { sensitivity: 'base' });
+            } else if (criteria === 'developer') {
+                return (a?.devName || '').localeCompare(b?.devName || '', undefined, { sensitivity: 'base' });
+            }
+            return 0;
+        });
+    }
 
-			const byDeveloperBtn = document.querySelector('.by-developer');
-			byDeveloperBtn.addEventListener('click', () => {
-				const sortedGames = sortGames(games, 'developer');
-				renderGameDetails(sortedGames);
-			});
-		})
-		.catch(err => console.error('Error fetching game details:', err));
+    // fetch and render (this mirrors your original second fetch + render behavior)
+    fetch(LOCAL_JSON)
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to fetch game details');
+            return response.json();
+        })
+        .then(data => {
+            const gamesData = data.gameSort || [];
+
+            // Initial render
+            renderGameDetails(gamesData);
+
+            // Add sorting functionality
+            byNameBtn?.addEventListener('click', () => {
+                const sortedGames = sortGames(gamesData.slice(), 'name');
+                renderGameDetails(sortedGames);
+            });
+
+            const byDeveloperBtn = document.querySelector('.by-developer');
+            byDeveloperBtn?.addEventListener('click', () => {
+                const sortedGames = sortGames(gamesData.slice(), 'developer');
+                renderGameDetails(sortedGames);
+            });
+        })
+        .catch(err => console.error('Error fetching game details:', err));
 
 })();
