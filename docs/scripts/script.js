@@ -10,13 +10,13 @@
     const byOrderBtn = document.querySelector('.by-order');
     const byRatingBtn = document.querySelector('.by-rating');
 
-    // Define the image container
+    // Image container
     const imageContainer = document.getElementById('imageContainer');
 
-    // Small utility: placeholder used when image missing or fails
+    // If image is missing
     const PLACEHOLDER_IMAGE = 'https://via.placeholder.com/400x250.png?text=No+Image';
 
-    // Normalize common URL mistakes (protocol-relative, GitHub blob -> raw, spaces)
+    // Fix URL mistakes
     function normalizeUrl(u) {
         if (!u || typeof u !== 'string') return null;
         let s = u.trim();
@@ -49,35 +49,35 @@
     function renderGameDetails(gamesList) {
         imageContainer.innerHTML = ''; // Clear the container before rendering
 
-        // guard: ensure we have an array
+        // Ensure arrray
         if (!Array.isArray(gamesList)) return;
 
         gamesList.forEach(game => {
             try {
-                // Create a container for each game
+                // Container for each game
                 const gameContainer = document.createElement('div');
                 gameContainer.className = 'game-container';
 
-                // Add the game name
+                // Add game name
                 const gameName = document.createElement('h3');
                 gameName.textContent = game?.appName || 'Untitled';
                 gameContainer.appendChild(gameName);
 
-                // Add the developer name
+                // Add developer name
                 const devName = document.createElement('p');
                 devName.textContent = `Developer: ${game?.devName || 'Unknown'}`;
                 gameContainer.appendChild(devName);
 
-                // Add the image
+                // Add image
                 const img = document.createElement('img');
-                // Normalize URL and fall back to placeholder if needed
+                // Normalize URL and use placeholder if needed
                 const candidate = normalizeUrl(game?.img) || game?.img || PLACEHOLDER_IMAGE;
                 img.src = candidate;
                 img.alt = `${game?.appName || 'Game'} Image`;
                 img.className = 'game-image';
                 img.style.width = '300px';
                 img.style.height = 'auto';
-                // If image fails to load, show placeholder and avoid infinite loop
+                // If image fails to load, show placeholder
                 img.onerror = () => {
                     img.onerror = null;
                     img.src = PLACEHOLDER_IMAGE;
