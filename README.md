@@ -44,7 +44,7 @@ A game entry provides information about its name, developer, repository link, li
 ### docs
 **⊢ styles/**
 
-  **⨽ styles.css**
+****⨽ styles.css****
   
 **⊢ script/**
 
