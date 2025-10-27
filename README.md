@@ -44,12 +44,22 @@ A game entry provides information about its name, developer, repository link, li
 ### docs
 **⊢ styles/**
 
-****⨽ styles.css****
+**⨽ styles.css**
   
 **⊢ script/**
 
-  **⨽ script.js**
+**⨽ script.js**
   
 **⊢ gameSort.json**
 
 **⨽ index.html**
+
+# Project Links
+
+GitHub Repo: https://github.com/ChickenAlfredo1121/doom-and-dispair-project-charlie
+
+Live Demo: https://chickenalfredo1121.github.io/doom-and-dispair-project-charlie/
+
+HTML Validator: https://validator.w3.org/nu/?showsource=yes&doc=https%3A%2F%2Fchickenalfredo1121.github.io%2Fdoom-and-dispair-project-charlie%2F**
+
+WAVE Accessibility Report:(https://wave.webaim.org/report#/https://chickenalfredo1121.github.io/doom-and-dispair-project-charlie**)
