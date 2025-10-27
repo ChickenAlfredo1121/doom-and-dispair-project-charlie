@@ -87,3 +87,7 @@ img {
     transform: scale(2); /* Scales the div to double its original size while maintaining the same ratio */
     transform-origin: center; /* Ensures scaling happens from the center */
 }
+
+#heading{
+    color: rgb(12, 12, 12);
+}
