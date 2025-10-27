@@ -43,8 +43,13 @@ A game entry provides information about its name, developer, repository link, li
 # File Structure
 ### docs
 **⊢ styles/**
-**|  ⨽ styles.css**
+
+  **⨽ styles.css**
+  
 **⊢ script/**
-**|  ⨽ script.js**
+
+  **⨽ script.js**
+  
 **⊢ gameSort.json**
+
 **⨽ index.html**
