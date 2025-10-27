@@ -41,10 +41,10 @@ A game entry provides information about its name, developer, repository link, li
 
 
 # File Structure
-📁 docs
-⊢ index.html
-⊢ styles/
-|  ⨽ styles.css
-⊢ script/
-|  ⨽ script.js
-⨽ gameSort.json
+### docs
+**⊢ styles/**
+**|  ⨽ styles.css**
+**⊢ script/**
+**|  ⨽ script.js**
+**⊢ gameSort.json**
+**⨽ index.html**
