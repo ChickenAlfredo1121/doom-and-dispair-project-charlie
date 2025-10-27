@@ -17,6 +17,12 @@ A game entry provides information about its name, developer, repository link, li
 **I want to browse and sort through different games,**
 **So that I can easly find and play the ones that interest me.**
 
+# Features
+- Load game data from `gameSort.json`  
+- Render game title, developer, image & links  
+- Sorting by:
+  - App Name
+  - Developer Name
 
 # validation
 
@@ -33,3 +39,12 @@ A game entry provides information about its name, developer, repository link, li
 - The script.js file takes care of data fetching, rendering, and sorting functionalities.
 - The application produces DOM elements dynamically to show the games and their corresponding images list.
 
+
+# File Structure
+📁 docs
+⊢ index.html
+⊢ styles/
+|  ⨽ styles.css
+⊢ script/
+|  ⨽ script.js
+⨽ gameSort.json
