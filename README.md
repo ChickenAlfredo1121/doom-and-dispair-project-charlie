@@ -6,15 +6,15 @@
 
 # Product name: Search and choose
 
-Search and Choose is an app that presents a group of small web-based games made by developer in an engaging way.
-Through this project, users have the possibility to look through, sort, and discover different games from various creators.
+Search and Choose is an app that presents a group of small web-based games developed in an engaging way.
+Through this project, users have the possibility to scroll through, and sort by game name and dev name, in order to discover different games from various creators.
 A game entry provides information about its name, developer, repository link, live demo, and a thumbnail preview image.
 
 
 # User story
 
 **As a player,**
-**I want to browse an sort through different games,**
+**I want to browse and sort through different games,**
 **So that I can easly find and play the ones that interest me.**
 
 
