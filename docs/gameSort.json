@@ -116,7 +116,24 @@
 "repo": "https://github.com/znasser46/zn_matching_game",
 "app": "https://znasser46.github.io/zn_matching_game/",
 "img": "https://raw.githubusercontent.com/znasser46/znasser46/main/docs/images/game_screenshot.png"
-}
+},
 
+{
+"id": 15,
+"devName": "jacobej15",
+"appName": "Memory Matching Game",
+"repo": "https://github.com/jacobej15/Memory-Matching-Game-.git",
+"app": "https://github.com/jacobej15/Memory-Matching-Game-/tree/main/Memory-Matching-Game--main",
+"img": "https://github.com/jacobej15/Memory-Matching-Game-/tree/db5997aadd7c0ae1f80931aa5d50b64ceddea97b/Memory-Matching-Game--main/images"
+},
+
+{
+"id": 16,
+"devName": "kise1205",
+"appName": "Memory Card Game",
+"repo": "https://github.com/Kise1205/urban-disco-bravo",
+"app": "https://kise1205.github.io/urban-disco-bravo/",
+"img": "Kise1205/urban-disco-bravo#4"
+}
 ]
 }
