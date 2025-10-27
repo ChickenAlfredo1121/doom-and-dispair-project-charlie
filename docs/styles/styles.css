@@ -1,24 +1,25 @@
+/* all homepage styles */
 body {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column; /* Keeps the flow of the page the same */
-    align-items: center; /* Centers the content horizontally */
-    min-height: 100vh; /* Ensures the body takes up the full viewport height */
-    background-color: rgb(219, 202, 215); /* Matches the homepage background */
-    overflow-x: hidden; /* Prevents horizontal scrolling */
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: rgb(219, 202, 215);
+    overflow-x: hidden;
 }
 
 .HomePage {
-    max-width: 90%; /* Restricts the width to prevent overflow */
-    margin: 20px auto; /* Centers the homepage content */
-    padding: 20px; /* Adds spacing around the content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for elegance */
-    border-radius: 10px; /* Rounds the corners for a polished look */
-    background-color: white; /* Adds contrast to the background */
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: white;
 }
 
-.title{
+.title {
     width: 300px;
     padding: 15px 15px;
     margin: 20px auto;
@@ -28,7 +29,7 @@ body {
 
 }
 
-.text{
+.text {
     width: 600px;
     padding: 20px 20px 15px 15px;
     margin: 20px auto;
@@ -39,9 +40,14 @@ body {
 
 }
 
+#heading {
+    color: rgb(12, 12, 12);
+}
+
+/* changing button colors to help with contrast */
 #sortButtons {
     display: inline-block;
-    text-align: left; /* Left-aligns the entire div */
+    text-align: left;
     line-height: 10px;
     padding: 5px 10px;
     margin: 5px;
@@ -59,35 +65,35 @@ body {
     background-color: rgb(131, 103, 103);
 }
 
-#liveLink, #repoLink {
-    display: inline-block; /* Reverts to inline-block for side-by-side appearance */
-    text-align: center; /* Centers the text */
-    line-height: 20px; /* Adjusts vertical alignment */
-    padding: 10px 15px; /* Adds consistent padding */
-    margin: 10px; /* Adds spacing between the links */
-    border: 2px solid rgb(194, 24, 91); /* Adds a border */
-    background-color: rgb(194, 24, 91); /* Matches the button color */
-    color: white; /* Sets text color */
-    border-radius: 5px; /* Adds rounded corners */
-    text-decoration: none; /* Removes underline */
-    font-size: 16px; /* Adjusts font size */
-    cursor: pointer; /* Changes cursor to pointer on hover */
+/* changing link colors to help with contrast */
+#liveLink,
+#repoLink {
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    padding: 10px 15px;
+    margin: 10px;
+    border: 2px solid rgb(194, 24, 91);
+    background-color: rgb(194, 24, 91);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-#liveLink:hover, #repoLink:hover {
-    background-color: rgb(155, 29, 79); /* Slightly darker color on hover */
+#liveLink:hover,
+#repoLink:hover {
+    background-color: rgb(155, 29, 79);
 }
 
 img {
-    display: block; /* Ensures the image is treated as a block element */
-    margin: 0; /* Removes auto-centering */
+    display: block;
+    margin: 0;
 }
 
 #imageDiv {
-    transform: scale(2); /* Scales the div to double its original size while maintaining the same ratio */
-    transform-origin: center; /* Ensures scaling happens from the center */
-}
+    transform: scale(2);
+    transform-origin: center;
 
-#heading{
-    color: rgb(12, 12, 12);
 }
